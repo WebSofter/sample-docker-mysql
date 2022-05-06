@@ -1,0 +1,27 @@
+version: '3.3'
+services:
+  doska_mysql:
+    image: mariadb
+    container_name: doska_mysql
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
+    env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: $MYSQL_DB
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
+      #MYSQL_ROOT_HOST: '%' #For external access. Uncommet, if you need
+    restart: always
+    ports:
+      - '3306:3306'
+    networks:
+      - doska-network
+
+volumes:
+  doska_mysql:
+    driver: local
+
+networks:
+  doska-network:
+    driver: bridge
