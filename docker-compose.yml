@@ -1,10 +1,13 @@
 version: '3.3'
 services:
   doska_mysql:
-    image: mariadb
+    #image: mariadb
+    build:
+      context: .
+      dockerfile: ./docker/mysql/Dockerfile
     container_name: doska_mysql
     volumes:
-      - ./docker/mysql:/var/lib/mysql
+      - ./docker/mysql/data:/var/lib/mysql
     env_file: .env
     environment:
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
